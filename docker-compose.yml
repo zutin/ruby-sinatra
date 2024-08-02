@@ -1,0 +1,33 @@
+services:
+  web:
+    image: ruby:3.3.4
+    working_dir: /app/ruby-sinatra
+    command: bash -c "bundle install && ruby server.rb"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app/ruby-sinatra
+      - rubygems:/usr/local/bundle
+
+  test:
+    image: ruby:3.3.4
+    working_dir: /app/ruby-sinatra
+    command: bash -c "bundle install && bundle exec rspec"
+    volumes:
+      - .:/app/ruby-sinatra
+      - rubygems:/usr/local/bundle
+    environment:
+      - RACK_ENV=test
+
+  lint:
+    image: ruby:3.3.4
+    working_dir: /app/ruby-sinatra
+    command: bash -c "bundle install && bundle exec rubocop"
+    volumes:
+      - .:/app/ruby-sinatra
+      - rubygems:/usr/local/bundle
+    environment:
+      - RACK_ENV=test
+
+volumes:
+  rubygems:
