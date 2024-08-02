@@ -6,7 +6,12 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.3.4
   Exclude:
-    - 'spec/spec_helper.rb'
+  - 'bin/**/*'
+  - 'vendor/**/*'
+  - 'db/**/*'
+  - 'config/**/*'
+  - 'script/**/*'
+  - 'spec/spec_helper.rb'
   SuggestExtensions: false
 
 Style/Documentation:
